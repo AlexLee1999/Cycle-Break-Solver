@@ -36,26 +36,19 @@ void graph::AddDirectedEdge(int id1, int id2, int distance)
 void graph::PrimAlgorithm()
 {
     _NodeList[0]->SetKey(0);
-    BuildMaxHeap(_NodeList);
+    BuildMaxHeap();
     for (int i = 0; i < _VerticesNumber; ++i)
     {
         node *n = extractmax();
         n->SetVisited();
-        // std::cout << _NodeList.size();
-        for (int i = 0; i < _NodeList.size(); ++i)
-        {
-            std::cout << _NodeList[i]->_id;
-        }
         if (n->_PreviousNode != nullptr)
         {
-            // std::vector<node::AdjacentNode> PreviousAdjacentList = n->_PreviousNode->_AdjacentNodeList; // get previous node adjacent list
             for (int j = 0; j < n->_PreviousNode->_AdjacentNodeList.size(); ++j)
             {
                 if (n->_PreviousNode->_AdjacentNodeList[j].first->_id == n->_id) // add edge in mst
                 {
                     n->_PreviousNode->_AdjacentNodeList[j].second.second = true; // change edge properties
                     _TotalWeight -= n->GetKey();
-                    // std::cout << _TotalWeight << std::endl;
                 }
             }
             for (int j = 0; j < n->_AdjacentNodeList.size(); ++j)
@@ -66,7 +59,6 @@ void graph::PrimAlgorithm()
                 }
             }
         }
-        // std::vector<node::AdjacentNode> CurrentNodeAdjacentList = n->_AdjacentNodeList;
         for (int j = 0; j < n->_AdjacentNodeList.size(); ++j)
         {
             if (!n->_AdjacentNodeList[j].first->_isVisited && n->_AdjacentNodeList[j].first->GetKey() < n->_AdjacentNodeList[j].second.first) // if adj not in mst && key < weight
@@ -117,9 +109,9 @@ void graph::MaxHeapify(int root)
     }
 }
 
-void graph::BuildMaxHeap(std::vector<node *> &_nodelists)
+void graph::BuildMaxHeap()
 {
-    int heapSize = _nodelists.size();
+    int heapSize = _NodeList.size();
     for (int i = heapSize / 2 - 1; i >= 0; i--)
     {
         MaxHeapify(i);
@@ -128,9 +120,7 @@ void graph::BuildMaxHeap(std::vector<node *> &_nodelists)
 node *graph::extractmax()
 {
     node *n = _NodeList[0];
-    swap(_NodeList[0], _NodeList[_VerticesNumber - 1]);
-
-    std::cout << std::endl;
+    swap(_NodeList[0], _NodeList[_NodeList.size() - 1]);
     _NodeList.pop_back();
     MaxHeapify(0);
     return n;

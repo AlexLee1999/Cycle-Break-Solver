@@ -22,7 +22,7 @@ public:
     void PrimAlgorithm();
     void Heapify(int);
     void MaxHeapify(int);
-    void BuildMaxHeap(std::vector<node *> &);
+    void BuildMaxHeap();
     node *extractmax();
     void IncreaseKey(node *);
     void WriteOutputFile(std::ostream&);
