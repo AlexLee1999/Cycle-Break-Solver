@@ -4,14 +4,20 @@ CFLAGS = -c
 
 OPTFLAGS = -O3 -std=c++11 -Wall
 
-BIN = cb
+BIN = cyclebreak
 
-${BIN}	: main.o cb.o 
-			$(CC) $(OPTFLAGS) cb.o main.o -o cb
-main.o 	   	: src/main.cpp 
-			$(CC)  $(OPTFLAGS) $(CFLAGS) src/main.cpp
-cb.o	: src/cb.cpp src/cb.h
-			$(CC) $(OPTFLAGS) $(CFLAGS) src/cb.cpp
+${BIN}		: main.o graph.o node.o 
+			$(CC) $(OPTFLAGS) -o ${BIN} main.o graph.o node.o
+
+main.o 	   	: src/main.cpp
+			$(CC) $(OPTFLAGS) $(CFLAGS) src/main.cpp
+
+graph.o	    : src/graph.cpp src/graph.h
+			$(CC) $(OPTFLAGS) $(CFLAGS) src/graph.cpp
+
+node.o	    : src/node.cpp src/node.h
+			$(CC) $(OPTFLAGS) $(CFLAGS) src/node.cpp
+
 clean:
-		rm -rf *.o  ${BIN}
+			rm -rf *.o  ${BIN}
 

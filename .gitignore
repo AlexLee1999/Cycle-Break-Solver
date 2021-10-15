@@ -1,6 +1,4 @@
 
-src/.DS_Store
-cb
-.DS_Store
 *.o
-.vscode/settings.json
+.DS_Store
+cyclebreak
