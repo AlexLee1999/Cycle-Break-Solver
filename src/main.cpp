@@ -17,10 +17,8 @@ int main(int argc, char *argv[])
     int VerticesSize;
     fin >> VerticesSize; // get vertices numbers
     graph *myGraph = new graph(type, VerticesSize);
-    // std::cout << VerticesSize;
     int EdgeSize;
     fin >> EdgeSize; // get edge numbers
-    // std::cout << EdgeSize;
     for (int i = 0; i < EdgeSize; ++i)
     {
         int id1, id2, distance;
@@ -32,12 +30,16 @@ int main(int argc, char *argv[])
         else if (type == "d")
         {
             myGraph->AddDirectedEdge(id1, id2, distance);
-            // std::cout<<id1<<" "<<id2<<" "<<distance<<std::endl;
         }
     }
-    if (type == "u")
+    if (type == "u") //Undirected Graph
     {
         myGraph->PrimAlgorithm();
-        myGraph->WriteOutputFile(fout);
+        myGraph->WriteUndirectedOutputFile(fout);
     }
+    else if (type == "d") //Directed Graph
+    {
+        myGraph->DFSAlgorithm();
+    }
+    
 }

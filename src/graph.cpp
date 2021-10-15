@@ -78,7 +78,7 @@ void graph::Heapify(int root)
     {
         if (_NodeList[t]->GetKey() < _NodeList[root]->GetKey())
         {
-            swap(_NodeList[t], _NodeList[root]);
+            std::swap(_NodeList[t], _NodeList[root]);
             root = t;
             t = (root - 1) / 2;
         }
@@ -104,7 +104,7 @@ void graph::MaxHeapify(int root)
     }
     if (t != root)
     {
-        swap(_NodeList[t], _NodeList[root]);
+        std::swap(_NodeList[t], _NodeList[root]);
         MaxHeapify(t);
     }
 }
@@ -120,7 +120,7 @@ void graph::BuildMaxHeap()
 node *graph::extractmax()
 {
     node *n = _NodeList[0];
-    swap(_NodeList[0], _NodeList[_NodeList.size() - 1]);
+    std::swap(_NodeList[0], _NodeList[_NodeList.size() - 1]);
     _NodeList.pop_back();
     MaxHeapify(0);
     return n;
@@ -137,7 +137,7 @@ void graph::IncreaseKey(node *x)
     }
 }
 
-void graph::WriteOutputFile(std::ostream &fout)
+void graph::WriteUndirectedOutputFile(std::ostream &fout)
 {
     fout << _TotalWeight << std::endl;
     for (int i = 0; i < _VerticesNumber; ++i)
@@ -159,9 +159,7 @@ void graph::WriteOutputFile(std::ostream &fout)
         }
     }
 }
-void graph::swap(node *&a, node *&b)
+
+void graph::DFSAlgorithm()
 {
-    node *temp = a;
-    a = b;
-    b = temp;
 }
